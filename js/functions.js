@@ -171,8 +171,6 @@ define([
         $currentContainer = getContainer(); // Get instance of the current slide up panel
         var currentContainerId = getIdFor($currentContainer); // Get id of the current slide up panel
         $currentPanelContent = getPanelContentFor(currentContainerId); // Get content container for the current slide up panel
-        
-        var nextScreenObject = App.getCurrentScreenObject(); // Get screen object about to be displayed
 
         $currentPanelContent.append($next); // Add the next screen element to the current content container
 
@@ -301,9 +299,6 @@ define([
     // @param view
     App.on( 'screen:showed', function( current_screen, view ) {
 
-        var currentScreenObject = App.getCurrentScreenObject(); // Get current screen object
-        var currentContainerId = getIdFor($currentContainer); // Get id of the current screen
-        
         /*
          * 1. Off canvas menu
          */
