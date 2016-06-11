@@ -29,7 +29,6 @@ html,body {
 }
 
 body {
-	background-color:#182C36;
 	text-rendering: optimizelegibility;     /* Enables kerning and optional ligatures */
 	-webkit-text-size-adjust: 100%;         /* Blocks text auto-scaling (eg. when switching from portrait to landscape) */
 	-webkit-font-smoothing: antialiased;    /* Enhances font aliasing */
@@ -249,6 +248,7 @@ a {
     text-align: left;
     padding: 14px 24px 14px 24px;
     opacity: 0;
+    display: none;
     overflow: visible;
     z-index: 500;
     background-color: #333;
@@ -257,18 +257,6 @@ a {
     margin: 0 auto;
     right: 0;
     border-radius: 40px 40px 40px 40px;
-}
-
-/* Show message bar transition */
-.message-on {
-	opacity: .9;
-	-webkit-transition: opacity 0.2s linear;
-}
-
-/* Hide message bar transition */
-.message-off {
-	opacity: 0;
-	-webkit-transition: opacity 0.2s linear;
 }
 
 .app-message-bar .spinner {

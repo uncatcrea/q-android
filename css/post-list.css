@@ -10,6 +10,10 @@
  * List item
  */
 
+.list-template .content-item {
+    position:relative;
+}
+
 .list-template .content-item a {
 	color: #4c4c4c;
 	margin: 0px;

@@ -594,9 +594,18 @@ define([
         // By default toast message hides itself
         var autoHide = typeof autoHide !== 'undefined' ? autoHide : true; // Can't use default value for parameters on Android
         
-		$("#app-message-bar").html(msgText);
-		$("#app-message-bar").removeClass("message-off").addClass("message-on");
-		
+        $("#app-message-bar").velocity({
+            opacity: .9
+        },{
+            queue: false,
+            display: 'block',
+            duration: 250,
+            begin: function() {                
+                $("#app-message-bar").html(msgText);            },
+            complete: function () {
+            }
+        });
+        
         // Hide toast message
         if ( autoHide === true ) {
             setTimeout( hideMessage, 3000 );
@@ -606,9 +615,19 @@ define([
 
     // @desc Hide toast message
 	function hideMessage() {
-		$("#app-message-bar").removeClass("message-on").addClass("message-off");	
-		$("#app-message-bar").html("");
-	}
+        $("#app-message-bar").velocity({
+            opacity: 0
+        },{
+            queue: false,
+            display: 'none',
+            duration: 250,
+            begin: function() {                
+            },
+            complete: function () {
+                $("#app-message-bar").html("");
+            }
+        });
+    }
 
     /*
      * 3. Refresh button
