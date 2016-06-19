@@ -245,3 +245,22 @@
     margin-bottom: 9px;
     font-family:'Roboto Bold',sans-serif;
 }
+
+
+
+/*
+ * Content unavailable in app
+ * Hidden with the [hide_from_apps notify="yes"] shortcode
+ */
+
+.wpak-content-not-available {
+    border: 1px #616161 solid;
+    border-radius: 4px;
+    padding: 5px 10px 5px 10px;
+    background-color: #fcfcfc;
+    font-family: 'PT Serif Regular', Georgia, serif;
+    color: #4c4c4c;
+	font-size: 17px;
+	line-height: 27px;
+	margin: 20px 0px 10px 0px;
+}

@@ -299,6 +299,8 @@ define([
     // @param view
     App.on( 'screen:showed', function( current_screen, view ) {
 
+        var currentScreenObject = App.getCurrentScreenObject();
+        
         /*
          * 1. Off canvas menu
          */
@@ -347,11 +349,11 @@ define([
             $("#app-layout").on("click", ".single-content a", openInBrowser);
             
             // Make any necessary modification to post/page content
-            prepareContent();
+            prepareContent( currentScreenObject );
             
             // Display videos and make them responsive
             // We defer video loading to keep transitions smooth
-            loadAndFormatVideosFor( current_screen );
+            loadAndFormatVideosFor( currentScreenObject );
 
 		}
 
@@ -710,11 +712,15 @@ define([
      */
     
     // @desc Prepare content for proper display / Part of the work is done in /php/prepare-content.php
-	function prepareContent() {
+	function prepareContent( currentScreenObject ) {
 
         // Modify embedded tweets code for proper display
         // Note: it is not possible to style embedded tweet in apps as Twitter doesn't identify the referer
         $(".single-template blockquote.twitter-tweet p").css( "display", "inline-block" );
+        
+        // Set content for unavailable content notification
+        // Note: unavaible content is notified with [hide_from_apps notify="yes"] shortcode
+        $(".wpak-content-not-available").html('Content unavailable');
 	
     }
     
@@ -728,7 +734,7 @@ define([
         e.preventDefault();
         
         try {
-            cordova.InAppBrowser.open(e.target.href, '_system', 'location=yes');    
+            cordova.InAppBrowser.open(e.target.href, '_system', 'location=yes');        
         } catch(err) {
             window.open(e.target.href, '_blank', 'location=yes');
         }
@@ -738,9 +744,9 @@ define([
     // @desc Load videos / launched after transitions to keep them smooth
     // data-src are filled and src emptied in /php/prepare-content.php
     // We use the fitVids library to make videos responsive (https://github.com/davatron5000/FitVids.js)
-    function loadAndFormatVideosFor( current_screen ) { // @todo currently bugging with pages
+    function loadAndFormatVideosFor( currentScreenObject ) { // @todo currently bugging with pages
 
-        if ( current_screen.screen_type === 'single' ) {
+        if ( currentScreenObject.screen_type === 'single' ) {
         
             var currentContainerId = getIdFor($currentContainer);
 
@@ -753,7 +759,7 @@ define([
             $('#' + currentContainerId + ' ' + '#single-content').fitVids();
         }
         
-        if ( current_screen.screen_type === 'page' ) {
+        if ( currentScreenObject.screen_type === 'page' ) {
 
             $("iframe").each(function(index) {
                 if ($(this).attr('data-src')) {
