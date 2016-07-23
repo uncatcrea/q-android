@@ -763,13 +763,28 @@ define([
         if ( currentScreenObject.screen_type === 'single' ) {
         
             var currentContainerId = getIdFor($currentContainer);
+            var dataSrc = '';
+            var isSoundCloudPlayer = false;
 
             $('#' + currentContainerId + ' ' + 'iframe').each(function(index) {
                 if ($(this).attr('data-src')) {
                     $(this).attr('src', $(this).attr('data-src'));
                 }
+                
+                // Check if the current iframe is a SoundCloud player and make it responsive
+                dataSrc = $(this).attr('data-src');
+                isSoundCloudPlayer = ( dataSrc.indexOf('soundcloud.com/player') != -1 );
+                
+                if ( isSoundCloudPlayer ) {
+                    $(this).css({
+                        width: '100%'
+                    });
+                }
+                
             });
 
+            
+            
             $('#' + currentContainerId + ' ' + '#single-content').fitVids();
         }
         
@@ -779,6 +794,17 @@ define([
                 if ($(this).attr('data-src')) {
                     $(this).attr('src', $(this).attr('data-src'));
                 }
+                
+                // Check if the current iframe is a SoundCloud player and make it responsive
+                dataSrc = $(this).attr('data-src');
+                isSoundCloudPlayer = ( dataSrc.indexOf('soundcloud.com/player') != -1 );
+                
+                if ( isSoundCloudPlayer ) {
+                    $(this).css({
+                        width: '100%'
+                    });
+                }
+                
             });
 
             $('#single-content').fitVids();
