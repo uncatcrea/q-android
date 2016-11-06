@@ -14,30 +14,16 @@ Copyright: 2016 Uncategorized Creations
 **Q for Android** is a demo theme for mobile apps and Progressive Web Apps (PWA) built with WP-AppKit, a WordPress plugin to create mobile apps connected to WordPress (more on that at http://getwpappkit.com).
 
 This **Favorites Demo** version version of Q for Android implements a _favorites_ feature
-allowing to set some posts as favorite, which will store them to be read later, event
+allowing to set some posts as favorite, which will store them to be read later, even
 if all app content has been refreshed in the meantime.
 
 This _Favorites_ version **requires the [Offline Favorites Addon](https://github.com/uncatcrea/wpak-addon-offline-favorites) to be installed**.
-Install this addon as you would install any WordPress Plugin, then in your WP-AppKit
-edit panel, check the "WP-AppKit Favorites" addon checkbox in the "Addons" panel
-(at the bottom of the screen), then save the App.
+See the addon page for install instructions and theme implementation details.
 
-Once the addon is activated, a **new component type** is available for your App:
-the _Favorites_ component type that allows to display a list of the posts marked as _Favorites_ in your app. Create a _Favorites_ component and add it to your app navigation.
-
-Once activated for an App, the _Favorites_ addon handles all the "Add/Remove/List" favorites
-features, provided that the theme uses the right css classes on the elements that handles the _Favorites_ feature.
-
-Here are the css classes that have to be used by the theme so that the _Favorites_ addon works well:
-- the element that toggles the favorite state of each post must have the **favorite-toggle** class.
-- this "toggle favorite" element must also have the WP-AppKit post "data" attributes that are retrieved by the function `TemplateTags.getPostDataAttributes( post.id )`.
-- this "toggle favorite" element must have the **is-favorite** class when the post is "favorite". This class can be auto-set in template by calling the function `<%= WpakFavorites.getIsFavoriteClass( post.id ) %>`
-
-Here is how we implement the _Favorites_ logic in the _Q for Android_ theme, followed by the the corresponding HTML code which implement the above CSS classes logic:
+Here is how we implement the _Favorites_ logic in the _Q for Android_ theme, followed by the corresponding HTML code which implements the _Favorites_ CSS classes logic (as defined on the [addon's page](https://github.com/uncatcrea/wpak-addon-offline-favorites)):
 - in _archive.html_ and _single.html_ templates we add a "star" element for each post. When clicking the star, the post is added to favorites. Re-clicking the star removes it from favorites list.
 - a new template _archive-favorites.html_ (based on _archive.html_ template) is used to render the favorite list (it must be called exactly that for the addon to recognize it) .
 - somme CSS customizations are made in theme's css files to render the favorites "stars" correctly.
-- if you implement a "Reset favorite" button in the _archive-favorites.html_ template, it should have the class **favorite-reset** to be recognized by the addon.
 
 Exemple of "favorite toggling" HTML code that is added to _archive.html_, _single.html_ and _archive-favorites.html_:
 
