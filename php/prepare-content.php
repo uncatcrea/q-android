@@ -10,7 +10,7 @@ function wpak_prepare_content($content,$post){
 
     // Create a DOM document from the post content
     $dom = new domDocument;
-    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $content);
+    $dom->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
   
     // Empty all iframes src attribute to defer iframes loading
     // Done notably for videos
@@ -56,6 +56,9 @@ function wpak_prepare_content($content,$post){
     }
     
     $content = $dom->saveHTML();
+    $content = preg_replace( '/\s*<!DOCTYPE .*?'.'>\s*/','',$content);
+    $content = preg_replace( '/\s*<\?xml encoding="utf-8" \?'.'>\s*/','',$content);
+    $content = preg_replace( '/\s*<\/?(html|body)>/','',$content);
     
     libxml_use_internal_errors(false);
 
