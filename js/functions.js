@@ -27,7 +27,7 @@ define([
     'theme/js/jquery.fitvids'
     ], function($,App,Storage,TemplateTags,Config,Moment,Velocity) {
 
-    
+   
     
     /*
      * App's parameters
@@ -113,6 +113,8 @@ define([
         
     } );
     
+	var last_history_action = '';
+	
     // @desc Catch if we're going to a single and coming from a single (it is the case when clicking on a post in the last posts widget at the bottom of a post)
     // Update properly the history stack
     App.filter( 'make-history', function( history_action, history_stack, queried_screen, current_screen, previous_screen ) {
@@ -125,17 +127,31 @@ define([
             }
         }
         
+		last_history_action = history_action;
+		
         // Return the proper history action
         return history_action;
 
     });
 
+	// Handle screen transitions when going from a single and coming to a single:
+	App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
+		if( current_screen.screen_type === 'single' && next_screen.screen_type === 'single' ) {
+			if ( last_history_action === 'push' ) {
+				transition = 'next-screen';
+			} else {
+				transition = 'previous-screen';
+			}
+			
+		}
+		return transition;
+	});
 
     
     /*
      * Actions
      */
-    
+	
     // @desc Detect transition types (aka directions) and launch corresponding animations
     App.action( 'screen-transition', function( $wrapper, $current, $next, current_screen, next_screen, $deferred ) {
 
@@ -237,6 +253,9 @@ define([
 		// Simply replace current screen with the new one
         $current.remove();
 		$wrapper.empty().append( $next );
+		if ( $currentContainer ) {
+			removeContainer($currentContainer);
+		}
 		$deferred.resolve();
         
 	};
@@ -246,6 +265,16 @@ define([
 	/**
      * App Events
      */
+
+	App.on('info:load-item-from-remote:start',function(){
+		// Start refresh icon animation
+        $(".loading-from-remote-button").show();
+	});
+	
+	App.on('info:load-item-from-remote:stop',function(){
+		// Stop refresh icon animation
+        $(".loading-from-remote-button").hide();
+	});
 
     // @desc Refresh process begins
 	App.on('refresh:start',function(){
@@ -344,10 +373,6 @@ define([
         // Actions shared by single and page
         if (current_screen.screen_type=="single" || current_screen.screen_type=="page") {
 
-            // Redirect all content hyperlinks clicks
-            // @todo: put it into prepareContent()
-            $("#app-layout").on("click", ".single-content a", openInBrowser);
-            
             // Make any necessary modification to post/page content
             prepareContent( currentScreenObject );
             
@@ -463,7 +488,9 @@ define([
     $('#app-layout').on( 'touchstart', '.has-ripple-feedback', rippleItemTapOn );
     $('#app-layout').on( 'touchend', '.has-ripple-feedback', rippleItemTapOff );
     
-    
+    // Redirect all content hyperlinks clicks
+	// @todo: put it into prepareContent()
+	$("#app-layout").on("click", ".single-content a", openInBrowser);
     
     /*
      * @desc Display default image if an error occured when loading an image element (eg. offline)
@@ -748,10 +775,39 @@ define([
             
         } else { // href begins with # (ie. it's an internal link)
             
-            App.navigate( href ); // Navigate to the corresponding screen
-            
+			App.navigate( href );
+			
+			/*
+			//THIS IS DONE IN ROUTER DIRECTLY NOW, with App.getItemsFromRemote() in single route.
+			//Check if dealing with a route to a single post:
+			var matches = href.match( /#single\/.+?\/(\d+)\/?/ );
+			if ( matches ) {
+				//We are trying to display a single post. Get its id and check
+				//if it exists in local storage.
+				var post_id = matches[1];
+				var local_post = App.getItem( post_id );
+				if ( !local_post ) {
+					//The post is not in local storage: we retrieve it from remote server:
+					App.getItemsFromRemote( [post_id], {
+						success: function() {
+							//Post retrieved successfully. We can navigate to it:
+							App.navigate( href );
+						},
+						error: function() {
+							//Requested post could not be retrieved: can be a network error
+							//or that the post does not exist on server.
+							//An error event has been triggered: theme will display the error automatically.
+						},
+						component_type: 'posts-listd'
+					} );
+				} else {
+					App.navigate( href );
+				}
+			} else {
+				App.navigate( href );
+			}
+			*/
         }
-        
 
     }
 
