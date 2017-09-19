@@ -268,12 +268,14 @@ define([
 
 	App.on('info:load-item-from-remote:start',function(){
 		// Start refresh icon animation
+		$("#refresh-button").hide();
         $(".loading-from-remote-button").show();
 	});
 	
 	App.on('info:load-item-from-remote:stop',function(){
 		// Stop refresh icon animation
         $(".loading-from-remote-button").hide();
+		$("#refresh-button").show();
 	});
 
     // @desc Refresh process begins
