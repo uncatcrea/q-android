@@ -27,8 +27,7 @@ define([
     'theme/js/jquery.fitvids'
     ], function($,App,Storage,TemplateTags,Config,Moment,Velocity) {
 
-   
-    
+
     /*
      * App's parameters
      */
@@ -146,6 +145,18 @@ define([
 		}
 		return transition;
 	});
+
+
+    //Handle transitions for deeplinks:
+    App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
+
+        //Display single in a slide up panel when opening from deeplinks:
+        if( next_screen.screen_type === 'single' && _.isEmpty( current_screen ) ) {
+                transition = 'next-screen';
+        }
+
+        return transition;
+    });
 
     
     /*
