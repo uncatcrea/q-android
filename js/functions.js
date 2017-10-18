@@ -112,6 +112,8 @@ define([
         
     } );
     
+	//Memorize the last history action so that we can decide what to do when
+	//doing "single to single" transitions:
 	var last_history_action = '';
 	
     // @desc Catch if we're going to a single and coming from a single (it is the case when clicking on a post in the last posts widget at the bottom of a post)
@@ -133,8 +135,9 @@ define([
 
     });
 
-	// Handle screen transitions when going from a single and coming to a single:
+	// Handle "single to single" transition:
 	App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
+		
 		if( current_screen.screen_type === 'single' && next_screen.screen_type === 'single' ) {
 			if ( last_history_action === 'push' ) {
 				transition = 'next-screen';
@@ -143,9 +146,9 @@ define([
 			}
 			
 		}
+		
 		return transition;
 	});
-
 
     //Handle transitions for deeplinks:
     App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
@@ -158,7 +161,6 @@ define([
         return transition;
     });
 
-    
     /*
      * Actions
      */
@@ -790,36 +792,6 @@ define([
             
 			App.navigate( href );
 			
-			/*
-			//THIS IS DONE IN ROUTER DIRECTLY NOW, with App.getItemsFromRemote() in single route.
-			//Check if dealing with a route to a single post:
-			var matches = href.match( /#single\/.+?\/(\d+)\/?/ );
-			if ( matches ) {
-				//We are trying to display a single post. Get its id and check
-				//if it exists in local storage.
-				var post_id = matches[1];
-				var local_post = App.getItem( post_id );
-				if ( !local_post ) {
-					//The post is not in local storage: we retrieve it from remote server:
-					App.getItemsFromRemote( [post_id], {
-						success: function() {
-							//Post retrieved successfully. We can navigate to it:
-							App.navigate( href );
-						},
-						error: function() {
-							//Requested post could not be retrieved: can be a network error
-							//or that the post does not exist on server.
-							//An error event has been triggered: theme will display the error automatically.
-						},
-						component_type: 'posts-listd'
-					} );
-				} else {
-					App.navigate( href );
-				}
-			} else {
-				App.navigate( href );
-			}
-			*/
         }
 
     }
