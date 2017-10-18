@@ -112,7 +112,7 @@ define([
         
     } );
     
-	//Memorize the last history action so that we can decide what to do when
+	//@desc Memorize the last history action so that we can decide what to do when
 	//doing "single to single" transitions:
 	var last_history_action = '';
 	
@@ -135,7 +135,7 @@ define([
 
     });
 
-	// Handle "single to single" transition:
+	// @desc Handle "single to single" transition:
 	App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
 		
 		if( current_screen.screen_type === 'single' && next_screen.screen_type === 'single' ) {
@@ -150,7 +150,7 @@ define([
 		return transition;
 	});
 
-    //Handle transitions for deeplinks:
+    // @desc Handle transitions for deeplinks:
     App.filter( 'transition-direction', function( transition, current_screen, next_screen ){
 
         //Display single in a slide up panel when opening from deeplinks:
@@ -279,18 +279,6 @@ define([
      * App Events
      */
 
-	App.on('info:load-item-from-remote:start',function(){
-		// Start refresh icon animation
-		$("#refresh-button").hide();
-        $(".loading-from-remote-button").show();
-	});
-	
-	App.on('info:load-item-from-remote:stop',function(){
-		// Stop refresh icon animation
-        $(".loading-from-remote-button").hide();
-		$("#refresh-button").show();
-	});
-
     // @desc Refresh process begins
 	App.on('refresh:start',function(){
 
@@ -328,6 +316,20 @@ define([
 		}
 
     });
+	
+	// @desc The app starts retrieving a new post from remote server
+	App.on('info:load-item-from-remote:start',function(){
+		// Start refresh icon animation
+		$("#refresh-button").hide();
+        $(".loading-from-remote-button").show();
+	});
+	
+	// @desc A new post was retrieved from remote server
+	App.on('info:load-item-from-remote:stop',function(){
+		// Stop refresh icon animation
+        $(".loading-from-remote-button").hide();
+		$("#refresh-button").show();
+	});
 
     // @desc An error occurs
     // @param error
