@@ -472,40 +472,41 @@ define([
      * They became available as soon as the target element is available in the DOM
      * Single and page content click on hyperlinks bindings are done in screen:showed
      * .app-screen scroll event binding is done in screen:showed because event delegation is not possible for this kind of event
+     * To understand how to handle events: https://developer.mozilla.org/en-US/docs/Web/API/Touch_events/Supporting_both_TouchEvent_and_MouseEvent
      */
 
     var $appLayout = $("#app-layout");
     
     // Menu button events
-    $appLayout.on("touchstart","#menu-button", menuButtonTapOn);
-	$appLayout.on("touchend","#menu-button", menuButtonTapOff);
+    $appLayout.on("touchstart mousedown","#menu-button", menuButtonTapOn);
+	$appLayout.on("touchend click","#menu-button", menuButtonTapOff);
 
     // Refresh button events
-    $appLayout.on("touchstart","#refresh-button", refreshTapOn);
-	$appLayout.on("touchend","#refresh-button", refreshTapOff);
+    $appLayout.on("touchstart mousedown","#refresh-button", refreshTapOn);
+	$appLayout.on("touchend click","#refresh-button", refreshTapOff);
 
     // Menu item events
-	$appLayout.on( "touchstart", "#menu-items li a", menuItemTapOn );
-    $appLayout.on( "touchend", "#menu-items li a", menuItemTapOff );
+	$appLayout.on( "touchstart mousedown", "#menu-items li a", menuItemTapOn );
+    $appLayout.on( "touchend click", "#menu-items li a", menuItemTapOff );
 	
     // Content item events
-    $appLayout.on("touchstart","#content .content-item a", contentItemTapOn);
-    $appLayout.on("click","#content .content-item a", contentItemTap);
+    $appLayout.on("touchstart mousedown","#content .content-item a", contentItemTapOn);
+    $appLayout.on("touchend click","#content .content-item a", contentItemTap);
 
     // Close slideup panel button events
-    $appLayout.on("touchstart","#back-button", closePanelButtonTapOn);
-    $appLayout.on("touchend","#back-button", closePanelButtonTapOff);
+    $appLayout.on("touchstart mousedown","#back-button", closePanelButtonTapOn);
+    $appLayout.on("touchend click","#back-button", closePanelButtonTapOff);
 
     // Block clicks on images in posts
-    $appLayout.on("click touchend","#single-content .content-image-link",function(e){e.preventDefault();});
+    $appLayout.on("touchend click","#single-content .content-image-link",function(e){e.preventDefault();});
     
     // Get more button events
-    $appLayout.on('touchstart', '#get-more-button', getMoreButtonTapOn);
-    $appLayout.on('touchend', '#get-more-button', getMoreButtonTapOff);
+    $appLayout.on('touchstart mousedown', '#get-more-button', getMoreButtonTapOn);
+    $appLayout.on('touchend click', '#get-more-button', getMoreButtonTapOff);
     
     // Ripple effect events
-    $appLayout.on( 'touchstart', '.has-ripple-feedback', rippleItemTapOn );
-    $appLayout.on( 'touchend', '.has-ripple-feedback', rippleItemTapOff );
+    $appLayout.on( 'touchstart mousedown', '.has-ripple-feedback', rippleItemTapOn );
+    $appLayout.on( 'touchend click', '.has-ripple-feedback', rippleItemTapOff );
     
     // Redirect all content hyperlinks clicks
 	// @todo: put it into prepareContent()
@@ -901,6 +902,9 @@ define([
 
     // @desc A finger releases an element with ripple effect
     function rippleItemTapOff(e){
+        
+        e.preventDefault();
+        
         showRipple = false; // Reset ripple effect
     }
 
