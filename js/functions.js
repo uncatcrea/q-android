@@ -41,16 +41,16 @@ define([
      * Init
      */
     
-    /**
-     * @desc Customizing the status bar to match the theme, relies on // https://github.com/apache/cordova-plugin-statusbar
-     */
-    try { // Testing if the Cordova plugin is available
-        StatusBar.backgroundColorByHexString("#212121");
-    } catch(err) {
-        console.log("StatusBar plugin not available - you're probably in the browser");
+    if ( Config.app_platform !== 'pwa' ) {
+        /**
+         * @desc Customizing the status bar to match the theme, relies on // https://github.com/apache/cordova-plugin-statusbar
+         */
+        try { // Testing if the Cordova plugin is available
+            StatusBar.backgroundColorByHexString("#212121");
+        } catch(err) {
+            console.log("StatusBar plugin not available - you're probably in the browser");
+        }
     }
-
-    
     
 	// Global variables
     var isMenuOpen = false; // Stores if the off-canvas menu is currently opened or closed
