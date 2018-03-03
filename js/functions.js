@@ -582,6 +582,7 @@ define([
 
     // @desc Finger presses the menu button
 	function menuButtonTapOn(e) {
+        e.preventDefault();
         showRipple = true; // Show ripple effect
 	}
 
@@ -598,7 +599,7 @@ define([
     function menuItemTapOff(e) {
         
         e.preventDefault();
-
+        
 		if (isMenuOpen) {
 
 			// Select tapped item
@@ -903,20 +904,13 @@ define([
 
     // @desc Get global tap position
     function getTapPos(e) {
-
+        
         var tapEvent, tapPos;
-        
-        if ( typeof e.originalEvent.touches != 'undefined' ) {
-            tapEvent = e.originalEvent.touches[0];
-        } else {
-            tapEvent = e;
-        }
-        
+        tapEvent = e.originalEvent.touches[0];
         tapPos = {
             tapLeft: tapEvent.pageX,
             tapTop: tapEvent.pageY
         };
-
         return tapPos;
         
     }
