@@ -105,6 +105,8 @@ define([
                 return customPostDate;
             }
             
+        } else if ( view_template === 'menu' ) {
+            template_args.Config = Config;
         }
         
         // Return parameters and functions
