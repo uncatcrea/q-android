@@ -474,42 +474,40 @@ define([
      * .app-screen scroll event binding is done in screen:showed because event delegation is not possible for this kind of event
      */
 
-    var $appLayout = $("#app-layout");
-    
     // Menu button events
-    $appLayout.on("touchstart","#menu-button", menuButtonTapOn);
-	$appLayout.on("touchend","#menu-button", menuButtonTapOff);
+    $("#app-layout").on("touchstart","#menu-button", menuButtonTapOn);
+	$("#app-layout").on("touchend","#menu-button", menuButtonTapOff);
 
     // Refresh button events
-    $appLayout.on("touchstart","#refresh-button", refreshTapOn);
-	$appLayout.on("touchend","#refresh-button", refreshTapOff);
+    $("#app-layout").on("touchstart","#refresh-button", refreshTapOn);
+	$("#app-layout").on("touchend","#refresh-button", refreshTapOff);
 
     // Menu item events
-	$appLayout.on( "touchstart", "#menu-items li a", menuItemTapOn );
-    $appLayout.on( "touchend", "#menu-items li a", menuItemTapOff );
+	$("#app-layout").on( "touchstart", "#menu-items li a", menuItemTapOn );
+    $("#app-layout").on( "touchend", "#menu-items li a", menuItemTapOff );
 	
     // Content item events
-    $appLayout.on("touchstart","#content .content-item a", contentItemTapOn);
-    $appLayout.on("click","#content .content-item a", contentItemTap);
+    $("#app-layout").on("touchstart","#content .content-item a", contentItemTapOn);
+    $("#app-layout").on("click","#content .content-item a", contentItemTap);
 
     // Close slideup panel button events
-    $appLayout.on("touchstart","#back-button", closePanelButtonTapOn);
-    $appLayout.on("touchend","#back-button", closePanelButtonTapOff);
+    $("#app-layout").on("touchstart","#back-button", closePanelButtonTapOn);
+    $("#app-layout").on("touchend","#back-button", closePanelButtonTapOff);
 
     // Block clicks on images in posts
-    $appLayout.on("click touchend","#single-content .content-image-link",function(e){e.preventDefault();});
+    $("#app-layout").on("click touchend","#single-content .content-image-link",function(e){e.preventDefault();});
     
     // Get more button events
-    $appLayout.on('touchstart', '#get-more-button', getMoreButtonTapOn);
-    $appLayout.on('touchend', '#get-more-button', getMoreButtonTapOff);
+    $('#app-layout').on('touchstart', '#get-more-button', getMoreButtonTapOn);
+    $('#app-layout').on('touchend', '#get-more-button', getMoreButtonTapOff);
     
     // Ripple effect events
-    $appLayout.on( 'touchstart', '.has-ripple-feedback', rippleItemTapOn );
-    $appLayout.on( 'touchend', '.has-ripple-feedback', rippleItemTapOff );
+    $('#app-layout').on( 'touchstart', '.has-ripple-feedback', rippleItemTapOn );
+    $('#app-layout').on( 'touchend', '.has-ripple-feedback', rippleItemTapOff );
     
     // Redirect all content hyperlinks clicks
 	// @todo: put it into prepareContent()
-	$appLayout.on("click", ".single-content a", openInBrowser);
+	$("#app-layout").on("click", ".single-content a", openInBrowser);
     
     /*
      * @desc Display default image if an error occured when loading an image element (eg. offline)
