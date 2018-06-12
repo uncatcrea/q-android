@@ -23,7 +23,9 @@ See the addon page for install instructions and theme implementation details.
 Here is how we implement the _Favorites_ logic in the _Q for Android_ theme, followed by the corresponding HTML code which implements the _Favorites_ CSS classes logic (as defined on the [addon's page](https://github.com/uncatcrea/wpak-addon-offline-favorites)):
 - in _archive.html_ and _single.html_ templates we add a "star" element for each post. When clicking the star, the post is added to favorites. Re-clicking the star removes it from favorites list.
 - a new template _archive-favorites.html_ (based on _archive.html_ template) is used to render the favorite list (it must be called exactly that for the addon to recognize it) .
-- somme CSS customizations are made in theme's css files to render the favorites "stars" correctly.
+- some CSS customizations are made in theme's css files to render the favorites "stars" correctly.
+
+See the Favorites addon's readme file for detailed information about the CSS classes and API functions that you can use to implement Favorites feature in your own theme.
 
 Exemple of "favorite toggling" HTML code that is added to _archive.html_, _single.html_ and _archive-favorites.html_:
 
