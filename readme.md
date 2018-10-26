@@ -1,17 +1,45 @@
 <!--
-Theme Name: Q for Android
+Theme Name: Q for Android, Favorites Addon Demo
 Description:  A clean and simple Android app news theme featuring: back button, comments, content refresh, custom post types, embeds, infinite list, latest posts, native sharing, network detection, off-canvas menu, offline content, pages, posts, pull to refresh, responsive, status bar, touch, transitions
 Version: 1.1.2
 Theme URI: https://github.com/uncatcrea/q-android
 Author: Uncategorized Creations			
-Author URI: http://uncategorized-creations.com	
+Author URI: http://uncategorized-creations.com
 WP-AppKit Version Required: >= 0.6
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
-Copyright: 2016 Uncategorized Creations	
+Copyright: 2016 Uncategorized Creations
 -->
 
 **Q for Android** is a demo theme for mobile apps and Progressive Web Apps (PWA) built with WP-AppKit, a WordPress plugin to create mobile apps connected to WordPress (more on that at http://getwpappkit.com).
+
+This **Favorites Demo** version version of Q for Android implements a _favorites_ feature
+allowing to set some posts as favorite, which will store them to be read later, even
+if all app content has been refreshed in the meantime.
+
+This _Favorites_ version **requires the [Offline Favorites Addon](https://github.com/uncatcrea/wpak-addon-offline-favorites) to be installed**.
+See the addon page for install instructions and theme implementation details.
+
+Here is how we implement the _Favorites_ logic in the _Q for Android_ theme, followed by the corresponding HTML code which implements the _Favorites_ CSS classes logic (as defined on the [addon's page](https://github.com/uncatcrea/wpak-addon-offline-favorites)):
+- in _archive.html_ and _single.html_ templates we add a "star" element for each post. When clicking the star, the post is added to favorites. Re-clicking the star removes it from favorites list.
+- a new template _archive-favorites.html_ (based on _archive.html_ template) is used to render the favorite list (it must be called exactly that for the addon to recognize it) .
+- some CSS customizations are made in theme's css files to render the favorites "stars" correctly.
+
+See the Favorites addon's readme file for detailed information about the CSS classes and API functions that you can use to implement Favorites feature in your own theme.
+
+Exemple of "favorite toggling" HTML code that is added to _archive.html_, _single.html_ and _archive-favorites.html_:
+
+```
+<!-- First we check that the addon is activated for the app -->
+<% if( TemplateTags.addonIsActive( 'wpak-addon-favorites' ) && TemplateTags.isComponentTypeLoaded( 'favorites' ) ) { %>
+  <!-- Note the use of TemplateTags.getPostDataAttributes() and WpakFavorites.getIsFavoriteClass() -->
+  <div class="favorite-toggle <%= WpakFavorites.getIsFavoriteClass( post.id ) %>" <%= TemplateTags.getPostDataAttributes( post.id ) %>>
+    <svg class="favorite-star" viewBox="0 0 512 512"><path d="..."/></svg>
+  </div>
+<% } %>
+```
+
+## Q for Android
 
 **Please note that beginning with WP-AppKit 0.6, Q for Android is pre-installed on plugin activation as the default theme for Android applications.**
 
