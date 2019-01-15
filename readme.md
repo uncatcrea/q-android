@@ -52,7 +52,6 @@ At the moment, Q for Android theme implements:
 
 ## Cordova Plugins
 Q for Android relies on Cordova plugins to:
-* Customize the iOS status bar: [https://github.com/apache/cordova-plugin-statusbar](https://github.com/apache/cordova-plugin-statusbar)
 * Open external links in default browser (ie. Chrome): [https://github.com/apache/cordova-plugin-inappbrowser](https://github.com/apache/cordova-plugin-inappbrowser)
 
 WP-AppKit export function adds these plugins automatically to your *config.xml* file. If you don't use the export, make sure to add them in order the theme to be able to work properly.
