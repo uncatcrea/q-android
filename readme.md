@@ -17,8 +17,6 @@ Copyright: 2016 Uncategorized Creations
 
 [![Screencast of Q for Android](https://cloud.githubusercontent.com/assets/7415862/16109551/c05a183a-33a9-11e6-868f-bcc1c23df5da.png)](https://www.youtube.com/watch?v=fSQVx8-rqCY)
 
-You might want to check **Q for iOS**, another fine theme for WP-AppKit: [Q for iOS](https://github.com/uncatcrea/q-ios)
-
 # Installation
 
 **Please note that beginning with WP-AppKit 0.6, Q for Android is pre-installed on plugin activation as the default theme for Android applications.**
