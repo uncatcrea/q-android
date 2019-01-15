@@ -43,6 +43,7 @@ At the moment, Q for Android theme implements:
 * Offline cache (meaning that you can read loaded posts offline)
 * Post thumbnail captions and subhead support
 * A responsive interface
+* Favorites support
 
 ## Android UI
 * Ripple effect
