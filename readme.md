@@ -13,7 +13,7 @@ Copyright: 2016 Uncategorized Creations
 
 **Q for Android** is a demo theme for mobile apps and Progressive Web Apps (PWA) built with WP-AppKit, a WordPress plugin to create mobile apps connected to WordPress (more on that at http://getwpappkit.com).
 
-**Please note that beginning with WP-AppKit 0.6, Q for Android is pre-installed on plugin activation as the default theme for Android applications.**
+**It is installed by default with the WP-AppKit plugin. However, you will be able to download a fresh installation from this repository**
 
 [![Screencast of Q for Android](https://cloud.githubusercontent.com/assets/7415862/16109551/c05a183a-33a9-11e6-868f-bcc1c23df5da.png)](https://www.youtube.com/watch?v=fSQVx8-rqCY)
 
