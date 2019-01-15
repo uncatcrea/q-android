@@ -19,13 +19,12 @@ Copyright: 2016 Uncategorized Creations
 
 # Installation
 
-**Please note that beginning with WP-AppKit 0.6, Q for Android is pre-installed on plugin activation as the default theme for Android applications.**
-
 * Download WP-AppKit: [https://github.com/uncatcrea/wp-appkit/releases](https://github.com/uncatcrea/wp-appkit/releases)
 * Install WP-AppKit as you would do for any other WordPress plugins (ie. drop the plugin folder in */wp-content/plugins*)
 * Activate WP-AppKit using the _Plugins_ WordPress admin panel. (Browse the *Installed Plugins* list and click the *Activate* link of WP-AppKit.)
 * Now you should have a brand new */wp-content/themes-wp-appkit* folder (yes, this is where app themes are stored)
 * Download the Q for Android from [this repository](https://github.com/uncatcrea/q-android/releases) and drop its folder in */wp-content/themes-wp-appkit*
+* Don't forget to rename the theme's folder if *Q for Android* is already installed.
 * In WordPress, use the *WP-AppKit* admin panel to create a new app and choose one of the themes in the *Appearance* box
 * From there you're free to test in your browser (using the Chrome's Emulation Mode) or directly try to compile
 
