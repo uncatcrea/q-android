@@ -1,4 +1,3 @@
-
  # WP-AppKit User Authentication theme module for Q for Android theme.
 
  This user authentication demo handles :
@@ -22,6 +21,6 @@ https://uncategorized-creations.com/wp-appkit/doc/user-login-feature/
 
 To use one or several of the above modules in Q for Android theme, simply require them in the functions.js file of your theme.
 For example, to use the top-login-form and premium-posts modules, add the following to the "define" statement of functions.js:
-define([..., 'theme/authentication/js/top-login-form', 'theme/authentication/js/premium-posts', ...])
+`define([..., 'theme/authentication/js/top-login-form', 'theme/authentication/js/premium-posts', ...])`
 
 No need to include the js/common module, it is already included by other modules.
