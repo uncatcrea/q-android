@@ -1,0 +1,24 @@
+<div id="content" class="content single-template">
+
+    <div class="post-title">
+
+        <h1>
+            User page
+        </h1>
+
+    </div>
+
+    <div id="single-content" class="single-content">
+
+        <strong>Login</strong> : <%= user.login %>
+        <br><br>
+        <strong>Capabilities</strong> :
+        <ul>
+            <% _.each( user.capabilities, function( capability ){ %>
+                <li><%= capability %></li>
+            <% } ); %>
+        </ul>
+
+    </div>
+
+</div>
