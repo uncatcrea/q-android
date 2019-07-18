@@ -595,11 +595,15 @@ define([
     function menuItemTapOn(e) {
         showRipple = true; // Show ripple effect
     }
-    
+
     function menuItemTapOff(e) {
-        
+
+        if ( $(this).hasClass('q-theme-prevent-navigation') ) {
+            return;
+        }
+
         e.preventDefault();
-        
+
 		if (isMenuOpen) {
 
 			// Select tapped item
